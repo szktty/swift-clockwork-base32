@@ -15,7 +15,7 @@ public struct Base32 {
             self.alignment = alignment
             length = getBufferLength(of: data, unit: alignment.rawValue)
             input = Data(repeating: 0, count: length)
-            _ = input.withUnsafeMutableBytes { bytes -> Void in
+            input.withUnsafeMutableBytes { bytes -> Void in
                 data.copyBytes(to: bytes, count: data.count)
                 return ()
             }
@@ -59,7 +59,7 @@ public struct Base32 {
         
         let length = data.count * 8 / 5 + (data.count * 8 % 5 > 0 ? 1 : 0)
         var ret = Data(repeating: 0, count: length)
-        _ = ret.withUnsafeMutableBytes { bytes -> Void in
+        ret.withUnsafeMutableBytes { bytes -> Void in
             buffer.output.copyBytes(to: bytes, count: length)
             return ()
         }
@@ -84,7 +84,7 @@ public struct Base32 {
     private static func createBuffer(from data: Data, alignment: Alignment) -> (Data, Data) {
         let length = getBufferLength(of: data, unit: alignment.rawValue)
         var input = Data(repeating: 0, count: length)
-        _ = input.withUnsafeMutableBytes { bytes -> Void in
+        input.withUnsafeMutableBytes { bytes -> Void in
             data.copyBytes(to: bytes, count: data.count)
             return ()
         }
@@ -117,7 +117,7 @@ public struct Base32 {
         if result {
             let length = data.count * 5 / 8
             var ret = Data(repeating: 0, count: length)
-            _ = ret.withUnsafeMutableBytes { bytes -> Void in
+            ret.withUnsafeMutableBytes { bytes -> Void in
                 buffer.output.copyBytes(to: bytes, count: length)
                 return ()
             }
